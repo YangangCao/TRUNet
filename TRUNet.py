@@ -44,7 +44,7 @@ class DepthwiseSeparableConv1d(nn.Module):
 class GRUBlock(nn.Module):
     def __init__(self, in_channels, hidden_size, out_channels, bidirectional):
         super(GRUBlock, self).__init__()
-        self.GRU = nn.GRU(in_channels, hidden_size, bidirectional=bidirectional)
+        self.GRU = nn.GRU(in_channels, hidden_size, batch_first=True, bidirectional=bidirectional)
         
         self.conv = nn.Sequential(nn.Conv1d(hidden_size * (2 if bidirectional==True else 1), out_channels, kernel_size = 1),
                     nn.BatchNorm1d(out_channels),
